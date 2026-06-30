@@ -13,7 +13,7 @@ import java.util.Calendar;
  */
 public class TelaAluno extends javax.swing.JFrame {
     
-    private ControllerTelaAluno crtlAluno = new ControllerTelaAluno();
+    private ControllerTelaAluno ctrlAluno = new ControllerTelaAluno();
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaAluno.class.getName());
 
@@ -37,7 +37,7 @@ public class TelaAluno extends javax.swing.JFrame {
         tabsTelaAluno = new javax.swing.JTabbedPane();
         tabListAluno = new javax.swing.JPanel();
         tabCadAluno = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabsAluno = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
@@ -84,7 +84,7 @@ public class TelaAluno extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 500));
 
-        jTabbedPane1.setName(""); // NOI18N
+        tabsAluno.setName(""); // NOI18N
 
         jLabel1.setText("Nome completo");
 
@@ -212,7 +212,7 @@ public class TelaAluno extends javax.swing.JFrame {
             .addContainerGap(26, Short.MAX_VALUE))
     );
 
-    jTabbedPane1.addTab("Cadastrar", jPanel1);
+    tabsAluno.addTab("Cadastrar", jPanel1);
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
@@ -225,17 +225,17 @@ public class TelaAluno extends javax.swing.JFrame {
         .addGap(0, 454, Short.MAX_VALUE)
     );
 
-    jTabbedPane1.addTab("Atualizar/Lista", jPanel2);
+    tabsAluno.addTab("Atualizar/Lista", jPanel2);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        .addComponent(tabsAluno, javax.swing.GroupLayout.Alignment.TRAILING)
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+        .addComponent(tabsAluno, javax.swing.GroupLayout.Alignment.TRAILING)
     );
 
     pack();
@@ -250,7 +250,7 @@ public class TelaAluno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparAlunoActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        crtlAluno.cadastrarAluno(edtNome.getText(), edtCpf.getText(), edtEmail.getText(), edtRg.getText(), dtcDataNasc.getCurrent());
+        ctrlAluno.cadastrarAluno(edtNome.getText(), edtCpf.getText(), edtEmail.getText(), edtRg.getText(), dtcDataNasc.getCurrent());
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
@@ -293,9 +293,9 @@ public class TelaAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel tabCadAluno;
     private javax.swing.JPanel tabListAluno;
+    private javax.swing.JTabbedPane tabsAluno;
     private javax.swing.JTabbedPane tabsTelaAluno;
     // End of variables declaration//GEN-END:variables
 }

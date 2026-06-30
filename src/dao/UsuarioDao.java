@@ -2,16 +2,17 @@
 package dao;
 
 import connection.ConexaoBanco;
-import model.Aluno;
+import model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
-public class AlunoDao {
-    
-    public void cadastrarAluno(Aluno al){
-        String command = "INSERT INTO aluno (nomeAluno, cpf, email, rg, dataNasc) VALUES (?,?,?,?,?)";
+
+public class UsuarioDao {
+
+    public void cadastroUsuario(Usuario user){
+        String command = "INSERT INTO usuario (nomeUsuario, senha, nivel, dataCadastro) VALUES (?,?,?,?)";
         
         Connection con = null;
         PreparedStatement testamento = null;
@@ -20,14 +21,12 @@ public class AlunoDao {
             con = ConexaoBanco.conectarBanco();
             testamento = con.prepareStatement(command);
             
-            testamento.setString(1, al.getNomeAluno());
-            testamento.setString(2, al.getCpf());
-            testamento.setString(3, al.getEmail());
-            testamento.setString(4, al.getRg());
-            testamento.setDate(5, java.sql.Date.valueOf(al.getDataNasc()));
+            testamento.setString(1, user.getNomeUsuario());
+            testamento.setString(2, user.getSenha());
+            testamento.setString(3, user.getNivel());
+            testamento.setDate(4, java.sql.Date.valueOf(user.getDataCadastro()));
             
             testamento.executeUpdate();
-            //System.out.println("Cadastro realizado");
         }
         catch(SQLIntegrityConstraintViolationException e){
             System.out.println("CPF ou email já cadastrado");
@@ -38,5 +37,6 @@ public class AlunoDao {
         finally{
             ConexaoBanco.desconectarBanco(con, testamento);
         }
+        
     }
 }

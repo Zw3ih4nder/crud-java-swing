@@ -4,6 +4,7 @@ package controller;
 import dao.AlunoDao;
 import java.time.LocalDate;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 import model.Aluno;
 
 
@@ -12,6 +13,19 @@ public class ControllerTelaAluno {
     
     public void cadastrarAluno(String nome,String cpf, String email, String rg, Calendar dataNasc){
         Aluno alunoModel = new Aluno();
+        
+        if (nome == null || nome.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "O nome é obrigatório.");
+            return;
+        }
+        if (cpf == null || cpf.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "O CPF é obrigatório.");
+            return;
+        }
+        if (email == null || email.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "O e-mail é obrigatório.");
+            return;
+        }
         
         alunoModel.setNomeAluno(nome);
         alunoModel.setCpf(cpf);
@@ -26,5 +40,6 @@ public class ControllerTelaAluno {
         alunoModel.setDataNasc(data);
         
         alunoDao.cadastrarAluno(alunoModel);
+        JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
     }
 }
