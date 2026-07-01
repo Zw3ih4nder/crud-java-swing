@@ -23,8 +23,20 @@ public class TelaAluno extends javax.swing.JFrame {
     public TelaAluno() {
         initComponents();
         setTitle("Academia - Área do Aluno");
+        
+//        tabelaDados = new JTable(){
+//            @Override
+//            public boolean isCellEditable(int row, int column){
+//                return false;
+//            }
+//        };
+        
+        carregarTabela();
     }
 
+    private void carregarTabela(){
+        tabelaDados.setModel(ctrlAluno.carregarTabela());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,6 +49,8 @@ public class TelaAluno extends javax.swing.JFrame {
         tabsTelaAluno = new javax.swing.JTabbedPane();
         tabListAluno = new javax.swing.JPanel();
         tabCadAluno = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         tabsAluno = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -52,6 +66,12 @@ public class TelaAluno extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         edtEmail = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        edtPesquisa = new javax.swing.JTextField();
+        btnAtualizar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaDados = new javax.swing.JTable();
 
         tabsTelaAluno.setPreferredSize(new java.awt.Dimension(700, 500));
 
@@ -80,6 +100,19 @@ public class TelaAluno extends javax.swing.JFrame {
         );
 
         tabsTelaAluno.addTab("Cadastrar", tabCadAluno);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(700, 500));
@@ -178,7 +211,7 @@ public class TelaAluno extends javax.swing.JFrame {
                         .addComponent(edtRg, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(edtNome)
                 .addComponent(edtEmail))
-            .addContainerGap(230, Short.MAX_VALUE))
+            .addContainerGap(235, Short.MAX_VALUE))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,20 +242,64 @@ public class TelaAluno extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(btnLimparAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(26, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     tabsAluno.addTab("Cadastrar", jPanel1);
+
+    jLabel6.setText("Pesquisa");
+
+    btnAtualizar.setText("Atualizar");
+
+    btnDeletar.setText("Deletar");
+
+    tabelaDados.setModel(new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+            {null, null, null, null, null, null},
+            {null, null, null, null, null, null},
+            {null, null, null, null, null, null},
+            {null, null, null, null, null, null}
+        },
+        new String [] {
+            "Nome", "CPF", "RG", "Data Nascimento", "Email", "ID"
+        }
+    ));
+    jScrollPane2.setViewportView(tabelaDados);
 
     javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
     jPanel2.setLayout(jPanel2Layout);
     jPanel2Layout.setHorizontalGroup(
         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 676, Short.MAX_VALUE)
+        .addGroup(jPanel2Layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(jScrollPane2)
+                    .addGap(6, 6, 6))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(edtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnAtualizar)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnDeletar)
+                    .addGap(0, 12, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addComponent(jLabel6)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
     );
     jPanel2Layout.setVerticalGroup(
         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 454, Short.MAX_VALUE)
+        .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGap(16, 16, 16)
+            .addComponent(jLabel6)
+            .addGap(2, 2, 2)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(edtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAtualizar)
+                .addComponent(btnDeletar))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
+            .addContainerGap())
     );
 
     tabsAluno.addTab("Atualizar/Lista", jPanel2);
@@ -235,7 +312,7 @@ public class TelaAluno extends javax.swing.JFrame {
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(tabsAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+        .addComponent(tabsAluno)
     );
 
     pack();
@@ -251,6 +328,7 @@ public class TelaAluno extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         ctrlAluno.cadastrarAluno(edtNome.getText(), edtCpf.getText(), edtEmail.getText(), edtRg.getText(), dtcDataNasc.getCurrent());
+        carregarTabela();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
@@ -279,22 +357,30 @@ public class TelaAluno extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnLimparAluno;
     private datechooser.beans.DateChooserPanel dtcDataNasc;
     private javax.swing.JTextField edtCpf;
     private javax.swing.JTextField edtEmail;
     private javax.swing.JTextField edtNome;
+    private javax.swing.JTextField edtPesquisa;
     private javax.swing.JTextField edtRg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel tabCadAluno;
     private javax.swing.JPanel tabListAluno;
+    private javax.swing.JTable tabelaDados;
     private javax.swing.JTabbedPane tabsAluno;
     private javax.swing.JTabbedPane tabsTelaAluno;
     // End of variables declaration//GEN-END:variables

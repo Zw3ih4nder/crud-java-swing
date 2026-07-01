@@ -4,7 +4,9 @@ package controller;
 import dao.AlunoDao;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Aluno;
 
 
@@ -41,5 +43,31 @@ public class ControllerTelaAluno {
         
         alunoDao.cadastrarAluno(alunoModel);
         JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+    }
+    
+    //metodo para montar a tabela com os dados do aluno
+    public DefaultTableModel carregarTabela(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nome");
+        modelo.addColumn("CPF");
+        modelo.addColumn("RG");
+        modelo.addColumn("Email");
+        modelo.addColumn("Data Nascimento");
+        
+        List<Aluno> lista = alunoDao.buscarTudo();
+        
+        for(Aluno aluno : lista){
+            modelo.addRow(new Object[]{
+                aluno.getCodAluno(),
+                aluno.getNomeAluno(),
+                aluno.getCpf(),
+                aluno.getRg(),
+                aluno.getEmail(),
+                aluno.getDataNasc()
+            });
+        }
+        return modelo;
     }
 }

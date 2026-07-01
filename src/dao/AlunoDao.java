@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
 
 public class AlunoDao {
     
@@ -38,5 +41,40 @@ public class AlunoDao {
         finally{
             ConexaoBanco.desconectarBanco(con, testamento);
         }
+    }
+    
+    public List<Aluno> buscarTudo(){
+        List<Aluno> lista = new ArrayList<>();
+        String command = "SELECT * FROM aluno";
+        Connection con = null;
+        PreparedStatement testamento = null;
+        
+        try{
+            con = ConexaoBanco.conectarBanco();
+            testamento = con.prepareStatement(command);
+            
+            ResultSet rs = testamento.executeQuery();
+            while(rs.next()){
+                Aluno aluno = new Aluno();
+                
+                aluno.setCodAluno(rs.getInt("codAluno"));
+                aluno.setNomeAluno(rs.getString("nomeAluno"));
+                aluno.setCpf(rs.getString("cpf"));
+                aluno.setEmail(rs.getString("email"));
+                String rg = rs.getString("rg");
+                if (rg != null) {
+                    aluno.setRg(rg);
+                }
+                aluno.setDataNasc(rs.getDate("dataNasc").toLocalDate());
+                lista.add(aluno);
+            }
+        }
+        catch(SQLException e){  
+            System.out.println("Erro: "+e.getMessage());
+        }
+        finally{
+            ConexaoBanco.desconectarBanco(con, testamento);
+        }
+        return lista;
     }
 }
