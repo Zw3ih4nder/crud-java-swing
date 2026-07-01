@@ -52,8 +52,8 @@ public class AlunoDao {
         try{
             con = ConexaoBanco.conectarBanco();
             testamento = con.prepareStatement(command);
-            
             ResultSet rs = testamento.executeQuery();
+            
             while(rs.next()){
                 Aluno aluno = new Aluno();
                 

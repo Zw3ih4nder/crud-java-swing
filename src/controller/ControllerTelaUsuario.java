@@ -4,12 +4,14 @@ package controller;
 import dao.UsuarioDao;
 import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import model.Usuario;
 
 
 public class ControllerTelaUsuario {
-    private UsuarioDao usuarioDao = new UsuarioDao();
+    private final UsuarioDao usuarioDao = new UsuarioDao();
     
     public void cadastrarUsuario(String nome, String senha, String nivel, Calendar dataCadastro){
         Usuario usuarioModel = new Usuario();
@@ -41,5 +43,27 @@ public class ControllerTelaUsuario {
         
         usuarioDao.cadastroUsuario(usuarioModel);
         JOptionPane.showMessageDialog(null,"Cadastro realizado com sucesso");
+    }
+    
+    public DefaultTableModel carregarTabela(){
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("ID");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Nivel");
+        modelo.addColumn("Data Cadastro");
+        
+        List<Usuario> lista = usuarioDao.buscarTudo();
+        
+        for(Usuario usuario : lista){
+            modelo.addRow(new Object[]{
+                usuario.getCodUsuario(),
+                usuario.getNomeUsuario(),
+                usuario.getNivel(),
+                usuario.getDataCadastro()
+            
+            });
+        }
+        return modelo;
     }
 }
